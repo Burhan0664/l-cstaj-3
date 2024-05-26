@@ -76,9 +76,9 @@ const App = () => {
         }
     };
 
-    const handleUpdatePost = async (postId, updatedData) => {
+    const handleUpdatePost = async (postId,formData) => {
         try {
-            const response = await Api.put(`/posts/${postId}`, updatedData, {
+            const response = await Api.put(`/posts/${postId}`, formData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -158,9 +158,9 @@ const App = () => {
                                 <td>{post.content}</td>
                                 <td>
                                     {/* Delete button */}
-                                    <button className="btn btn-danger" onClick={() => handleDeletePost(post.id)}>Delete</button>
+                                    <button className="btn btn-danger"  onClick={() => handleDeletePost(post.id)}>Delete</button>
                                     {/* Update button */}
-                                    <button className="btn btn-primary" onClick={() => handleUpdatePost(post.id, {/* Updated data */})}>Update</button>
+                                    <button className="btn btn-primary" onChange={handleInputChange} onClick={() => handleUpdatePost(post.id, formData)}>Update</button>
                                 </td>
                             </tr>
                         ))}

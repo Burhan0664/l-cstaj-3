@@ -24,13 +24,13 @@ class PostService:
         return new_post.dict()
 
     def update_post(self, post_id: int, title: str, content: str, published: bool) -> Optional[dict]:
-        post = self.get_post_by_id(post_id)
+        post = self.db_session.query(Post).get(post_id)
         if post:
             post.title = title
             post.content = content
             post.published = published
             self.db_session.commit()
-        return post.dict() if post else None
+        return post[dict] if post else None
 
     def delete_post(self, post_id: int):
         post = self.db_session.query(Post).get(post_id)
